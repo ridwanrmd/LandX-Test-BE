@@ -5,6 +5,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TodolistsModule } from './todolists/todolists.module';
+import { APP_FILTER } from '@nestjs/core';
+import { HttpErrorFilter } from './shared/http-error.filter';
 
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT} = process.env;
 
@@ -25,6 +27,11 @@ const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT} = process.env;
     TodolistsModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService, {
+      provide: APP_FILTER,
+      useClass: HttpErrorFilter
+    }
+  ],
 })
 export class AppModule {}
