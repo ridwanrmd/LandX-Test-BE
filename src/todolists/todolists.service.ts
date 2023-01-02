@@ -29,4 +29,9 @@ export class TodolistsService {
         await this.todolistsRepository.update({id}, data)
         return await this.todolistsRepository.findOne({where: {id}})
     }
+
+    async removeTodo(id: number) {
+        await this.todolistsRepository.delete({id})
+        return ({deleted: true})
+    }
 }
