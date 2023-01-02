@@ -4,6 +4,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TodolistsModule } from './todolists/todolists.module';
 
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT} = process.env;
 
@@ -20,7 +21,8 @@ const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT} = process.env;
       synchronize: true,
       dropSchema: false,
       logging: true,
-    })
+    }),
+    TodolistsModule
   ],
   controllers: [AppController],
   providers: [AppService],
