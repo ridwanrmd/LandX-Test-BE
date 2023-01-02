@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Patch, Param } from '@nestjs/common';
 import { TodolistsService } from './todolists.service';
 import { TodoListsDTO } from './todolists.dto';
 
@@ -14,5 +14,10 @@ export class TodolistsController {
     @Post()
     addTodo(@Body() data: TodoListsDTO) {
         return this.TodolistsService.createTodo(data)
+    }
+
+    @Get(':id')
+    getById(@Param('id') id: number) {
+        return this.TodolistsService.getOne(id)
     }
 }
