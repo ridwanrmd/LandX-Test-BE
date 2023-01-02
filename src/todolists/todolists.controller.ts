@@ -20,4 +20,9 @@ export class TodolistsController {
     getById(@Param('id') id: number) {
         return this.TodolistsService.getOne(id)
     }
+
+    @Patch(':id')
+    updateTodo(@Param('id') id: number, @Body() data: Partial<TodoListsDTO>) {
+        return this.TodolistsService.editTodo(id, data)
+    }
 }
